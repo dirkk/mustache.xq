@@ -7,8 +7,7 @@ module namespace compiler = "compiler.xq" ;
 declare function compiler:compile( $parseTree, $json ) {
  let $div := parse-xml( fn:concat( '&lt;div&gt;',
    fn:string-join(compiler:compile-xpath( $parseTree, json:parse( $json ) ), ''),  '&lt;/div&gt;') )
- let $handle := compiler:handle-escaping($div)
-  return $handle
+  return compiler:handle-escaping($div)
 };
 
 declare function  compiler:compile-xpath( $parseTree, $json ) {
@@ -31,7 +30,7 @@ declare function compiler:compile-node( $node, $json, $pos, $xpath ) {
     case element(inverted-section) return
       let $sNode := compiler:unpath( fn:string( $node/@name ) , $json, $pos, $xpath )
       return 
-        if ( $sNode/@boolean = "true" or ( not( empty( tokenize( $json/@booleans, '\s')[.=$node/@name] ) ) ) )
+        if ( $sNode/@boolean = "true" or ( not( empty( tokenize( $json/@booleans, '\s')[.=$node/@name] ) ) and $sNode/text() = "true" ) )
         then ()
         else if ( $sNode/@type = "array" or ( not( empty( tokenize( $json/@arrays, '\s')[.=$node/@name] ) ) ) )
              then if (fn:exists($sNode/node())) 

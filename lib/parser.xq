@@ -141,7 +141,7 @@ declare function parseSection($in as xs:string?, $n, $sd as xs:string, $ed as xs
                        if($n eq $parser:_START_SECTION_) then "section"
                        else "inverted-section"
                      } {
-                       attribute name { fn:normalize-space($r/@value) },
+                       attribute name { fn:replace( fn:normalize-space($r/@value), "([^_]?)_([^_]?)", "$1__$2" ) },
                        $r3/node()
                      }
                    }
@@ -156,7 +156,7 @@ declare function parseDotNotation($n, $name)
   let $after := fn:substring-after($name, ".")
   return if($before and $after) then
     element section {
-      attribute name { $before },
+      attribute name { fn:replace( $before, "([^_]?)_([^_]?)", "$1__$2" ) },
       parseDotNotation($n, $after)
     }
   else
@@ -165,7 +165,7 @@ declare function parseDotNotation($n, $name)
       else if($n eq $parser:_START_EXT_) then 'rtag'
       else "utag"
     } {
-      attribute name { $name }
+      attribute name { fn:replace( $name, "([^_]?)_([^_]?)", "$1__$2" ) }
     }
 };
 
@@ -191,7 +191,7 @@ declare function parseETag($in as xs:string?, $n, $sd as xs:string, $ed as xs:st
              else if($n eq $parser:_START_COMMENT_) then
                element comment { text{ $r/@value } }
              else
-               element partial { attribute name { $name } }
+               element partial { attribute name { fn:replace($name, "([^_]?)_([^_]?)", "$1__$2" ) } }
            }
          else error($r2)
      else error($r)
