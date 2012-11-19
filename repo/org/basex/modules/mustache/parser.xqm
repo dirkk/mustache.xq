@@ -5,8 +5,9 @@
   twitter: @jpcs
 :)
 xquery version "3.0";
-module namespace parser = "parser.xq";
-declare default function namespace "parser.xq";
+
+module namespace parser = "http://basex.org/modules/mustache/parser";
+declare default function namespace "http://basex.org/modules/mustache/parser";
 
 declare variable $parser:_EOF_ := 0;
 declare variable $parser:_START_SECTION_ := 1;
