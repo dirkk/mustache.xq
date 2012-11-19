@@ -28,8 +28,7 @@ This Mustache.xq implementation works specifically for the XQuery processor
 A quick example how to use mustache.xq:
 
 ``` xquery
-    import module namespace mustache = "mustache.xq"
-     at "mustache.xqy";
+    import module namespace mustache = "mustache.xq" at "mustache.xq";
     mustache:render( 'Hello {{text}}!', '{ "text": "world"}' )
 ```
 
