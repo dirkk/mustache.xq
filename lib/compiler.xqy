@@ -105,12 +105,15 @@ declare function compiler:resolve-mustache-base64( $text ) {
       let $b64    := $as//*:group[@nr=1]
       let $before := $as/*:match[1]/preceding::*:non-match[1]/fn:string()
       let $after  := $as/*:match[fn:last()]/following::*:non-match[1]/fn:string()
-      return fn:string-join( ($before, for $decoded in Q{java:org.basex.util.base64}decode( string($b64) )
-      let $executed := 
-        if ( fn:matches( $decoded, "(&lt;|&gt;|&amp;|&quot;|&apos;)" ) )
-        then fn:string($decoded)
-        else fn:string(try { xquery:eval( $decoded ) } catch * { $decoded })
-      return $executed, $after), '' )
+      return fn:string-join( ($before, 
+	for $b64-single in $b64 
+	let $decoded := Q{java:org.basex.util.base64}decode( string($b64-single) )
+        let $executed := 
+          if ( fn:matches( $decoded, "(&lt;|&gt;|&amp;|&quot;|&apos;)" ) )
+          then fn:string($decoded)
+          else fn:string(try { xquery:eval( $decoded ) } catch * { $decoded })
+        return $executed, $after
+      ), '' )
     else if ( fn:matches( $token, '\{\{b64:\}\}' ) )
     then ""
     else $token, " ") };

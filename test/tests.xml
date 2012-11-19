@@ -667,7 +667,7 @@
     <hash>{'{
       "terms": [
         {"name": "t1", "index": 0},
-        {"name": "t2", "index": 1},
+        {"name": "t2", "index": 1}
       ]
     }'}</hash>
     <output><div>t1
@@ -693,7 +693,7 @@
   </test>
   <test name="Apos" section="complex">
     <template>{'{{apos}}{{control}}'}</template>
-    <hash>{'{"apos": "&#39;", "control":"X")}'}</hash>
+    <hash>{'{"apos": "&#39;", "control":"X"}'}</hash>
     <output><div>&#39;X</div></output>
     <parseTree>
       <multi> 
