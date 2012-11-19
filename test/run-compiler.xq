@@ -1,6 +1,6 @@
 xquery version "3.0" ;
 
-import module namespace mustache = "mustache.xq" at "../mustache.xq";
+import module namespace mustache = "http://basex.org/modules/mustache/mustache";
 
 declare variable $template external ;
 declare variable $hash      external ;

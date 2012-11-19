@@ -1,6 +1,8 @@
 xquery version "3.0" ;
 
-declare variable $tests := xquery:invoke('tests.xml') ;
+declare variable $dir := file:dir-name(static-base-uri()) || '/';
+
+declare variable $tests := xquery:invoke($dir || 'tests.xml');
 
 declare function local:summarize( $name, $nodes ) {
   let $parseTests       := fn:count($nodes/@parseTest)
@@ -17,14 +19,14 @@ declare function local:summarize( $name, $nodes ) {
     perc="{if ($nokCompileTests=0) then '100' else fn:round(100 * $okCompileTests div ($okCompileTests+$nokCompileTests))}"/>)} };
 
 declare function local:parser-test( $template, $parseTree ) {
-  xquery:invoke( 'run-parser.xqy', map{
+  xquery:invoke( $dir || 'run-parser.xq', map{
 	'template' := $template,
 	'parseTree' := $parseTree
   })
 };
 
 declare function local:compiler-test( $template, $hash, $output ) {
-    xquery:invoke( 'run-compiler.xqy', map{
+    xquery:invoke( $dir || 'run-compiler.xq', map{
 	'template' := $template,
 	'hash' := $hash,
 	'output' := $output

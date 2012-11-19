@@ -25,10 +25,12 @@ This Mustache.xq implementation works specifically for the XQuery processor
 
 ## Usage
 
-A quick example how to use mustache.xq:
+First, copy the contents of the repo directory into your [BaseX Repository][6].
+
+Next, run the following query:
 
 ``` xquery
-    import module namespace mustache = "mustache.xq" at "mustache.xq";
+    import module namespace mustache = "http://basex.org/modules/mustache/mustache";
     mustache:render( 'Hello {{text}}!', '{ "text": "world"}' )
 ```
 
@@ -38,7 +40,7 @@ Returns
     <div>Hello world!</div>
 ```
 
-A slightly more complicated example
+A slightly more complicated example:
 
 ``` xquery
     mustache:render(
@@ -104,7 +106,7 @@ To run the tests simply change your directory to the root of mustache.xq
 
 Assuming you have installed BaseX in your system you can run the tests by executing:
 
-    basex index.xqy
+    basex index.xq
 
 Make sure all the tests pass before sending in your pull request!
 
@@ -216,3 +218,5 @@ To better understand what is supported refer to the Supported Features section
 [3]: http://github.com/dirkk/mustache.xq/issues
 [4]: http://basex.org
 [5]: http://github.com/dscape/mustache.xq
+[6]: http://docs.basex.org/wiki/Options#REPOPATH
+
