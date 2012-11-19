@@ -206,7 +206,7 @@
   </test>
   <test name="Array of Strings" section="section">
     <template>{'{{#array_of_strings}} {{.}}! {{/array_of_strings}}'}</template>
-    <hash>{'{array_of_strings: ["hello", "world"]}'}</hash>
+    <hash>{'{"array_of_strings": ["hello", "world"]}'}</hash>
     <output><div>hello! world!</div></output>
     <parseTree>
       <multi>
@@ -473,10 +473,10 @@
         {{b}}
       {{/a}}
     {{/foo}}'}</template>
-    <hash>{'{ foo: [
-      {a: {b: 1}},
-      {a: {b: 2}},
-      {a: {b: 3}}
+    <hash>{'{ "foo": [
+      {"a": {"b": 1}},
+      {"a": {"b": 2}},
+      {"a": {"b": 3}}
     ] }'}</hash>
     <output><div>1 2 3</div></output>
     <parseTree>
@@ -494,8 +494,8 @@
   <test name="Welcome Joe" section="complex">
     <template>{'{{greeting}}, {{name}}!'}</template>
     <hash>{'{
-      name: "Joe",
-      greeting: "Welcome" }'}</hash>
+      "name": "Joe",
+      "greeting": "Welcome" }'}</hash>
     <output><div>Welcome, Joe!</div></output>
     <parseTree>
       <multi>
@@ -515,7 +515,8 @@
                {{p}}
              {{/section}}
            {{/section}}
-        {{/section}}
+        /Enums
+{{/section}}
       {{/book}}'}</template>
     <hash>{'
       {"book": {"section": {"section": {"section": {"p": "Alive!"}}}}}'}</hash>
@@ -664,9 +665,9 @@
     {{/terms}}
     '}</template>
     <hash>{'{
-      terms: [
-        {name: "t1", index: 0},
-        {name: "t2", index: 1},
+      "terms": [
+        {"name": "t1", "index": 0},
+        {"name": "t2", "index": 1},
       ]
     }'}</hash>
     <output><div>t1
@@ -709,11 +710,11 @@
       {{index}}
     {{/terms}}'}</template>
     <hash>{'
-      {name: "name",
-      description: "desc",
-      terms: [
-        {name: "t1", index: 0},
-        {name: "t2", index: 1} ] }'}</hash>
+      {"name": "name",
+      "description": "desc",
+      "terms": [
+        {"name": "t1", "index": 0},
+        {"name": "t2", "index": 1} ] }'}</hash>
     <output><div>name
         desc
           t1
