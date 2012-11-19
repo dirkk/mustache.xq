@@ -173,9 +173,9 @@ This is not the actual test that we run (you can see a list of those in test/ind
 
 ### Extensions
 
-####  ✔ Variables with embedded XQuery
+####  (✔) Variables with embedded XQuery
      Template : {{x}}
-     Hash     : { "x": ( xs:integer(4) + 5 ) * 2 }
+     Hash     : '{ "x": ' || ( xs:integer(4) + 5 ) * 2 || '}'
      Output   : <div>18</div>
 
 ####  ✔ Dot Notation
