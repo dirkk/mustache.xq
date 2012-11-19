@@ -515,7 +515,6 @@
                {{p}}
              {{/section}}
            {{/section}}
-        /Enums
 {{/section}}
       {{/book}}'}</template>
     <hash>{'
