@@ -210,7 +210,7 @@
     <output><div>hello! world!</div></output>
     <parseTree>
       <multi>
-        <section name="array_of_strings">
+        <section name="array__of__strings">
           <etag name="."/>
           <static>!</static>
         </section>
@@ -342,9 +342,9 @@
         <static>! You have just won $</static>
         <etag name="value"/>
         <static>!</static>
-        <section name="in_ca">
+        <section name="in__ca">
           <static>Well, $</static>
-          <etag name="taxed_value"/>
+          <etag name="taxed__value"/>
           <static>, after taxes.</static>
         </section>
       </multi>
@@ -478,7 +478,7 @@
       {"a": {"b": 2}},
       {"a": {"b": 3}}
     ] }'}</hash>
-    <output><div>1 2 3</div></output>
+    <output><div>123</div></output>
     <parseTree>
       <multi>
         <section name="foo">
@@ -637,13 +637,13 @@
         </ul></div></output>
     <parseTree>
       <multi>
-        <section name="a_object">
+        <section name="a__object">
           <static>&lt;h1&gt;</static>
           <etag name="title"/>
           <static>&lt;/h1&gt; &lt;p&gt;</static>
           <etag name="description"/>
           <static>&lt;/p&gt; &lt;ul&gt;</static>
-          <section name="a_list">
+          <section name="a__list">
             <static>&lt;li&gt;</static>
             <etag name="label"/>
             <static>&lt;/li&gt;</static>
@@ -845,7 +845,7 @@
     <template>{'{{> next_more}}'}</template>
     <parseTree>
       <multi> 
-        <partial name="next_more"/> 
+        <partial name="next__more"/> 
       </multi>
     </parseTree>
   </test>
