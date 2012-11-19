@@ -25,7 +25,7 @@
   </test>
   <test name="Variables with embedded XQuery" section="etag">
     <template>{'x=4+5*2={{x}}'}</template>
-    <hash>{'{ "x": ( xs:integer(4) + 5 ) * 2 }'}</hash>
+    <hash>{'{ "x": ' || ( xs:integer(4) + 5 ) * 2 || '}'}</hash>
     <output><div>x=4+5*2=18</div></output>
     <parseTree>
       <multi> 
@@ -332,7 +332,7 @@
     <hash>{'{
       "name": "Chris",
       "value": 10000,
-      "taxed_value": 10000 - (10000 * 0.4),
+      "taxed_value": ' || 10000 - (10000 * 0.4) || ',
       "in_ca": true }'}</hash>
     <output><div>Hello Chris! You have just won $10000! Well, $6000, after taxes.</div></output>
     <parseTree>
@@ -708,8 +708,8 @@
       {{name}}
       {{index}}
     {{/terms}}'}</template>
-    <hash>{'{
-      name: "name",
+    <hash>{'
+      {name: "name",
       description: "desc",
       terms: [
         {name: "t1", index: 0},
