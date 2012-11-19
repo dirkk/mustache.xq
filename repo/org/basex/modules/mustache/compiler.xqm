@@ -2,7 +2,8 @@
   XQuery Generator for mustache
 :)
 xquery version "3.0" ;
-module namespace compiler = "compiler.xq" ;
+
+module namespace compiler = "http://basex.org/modules/mustache/compiler";
 
 declare function compiler:compile( $parseTree, $json ) {
  let $div := parse-xml( fn:concat( '&lt;div&gt;',
