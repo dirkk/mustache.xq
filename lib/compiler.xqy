@@ -66,9 +66,9 @@ declare function compiler:eval( $node-name, $json, $pos, $xpath, $etag ) {
 declare function compiler:eval( $node-name, $json, $pos, $xpath, $etag, $desc ) { 
   let $unpath :=  compiler:unpath( $node-name, $json, $pos, $xpath, $desc )
   return try {
-    let $value := fn:string( xquery:eval( $unpath ) )
+    let $value := fn:string( $unpath )
     return if ($etag) 
-    then fn:concat('{{b64:', Q{java:org.basex.util.Base64}encode($value), '}}') (: recursive mustache ftw :)
+    then '{{b64:' || Q{java:org.basex.util.Base64}encode($value) || '}}'
     else $value
   } catch * { $unpath } };
 
@@ -105,7 +105,7 @@ declare function compiler:resolve-mustache-base64( $text ) {
       let $b64    := $as//*:group[@nr=1]
       let $before := $as/*:match[1]/preceding::*:non-match[1]/fn:string()
       let $after  := $as/*:match[fn:last()]/following::*:non-match[1]/fn:string()
-      return fn:string-join( ($before, for $decoded in Q{java:org.basex.util.base64}decode( $b64 )
+      return fn:string-join( ($before, for $decoded in Q{java:org.basex.util.base64}decode( string($b64) )
       let $executed := 
         if ( fn:matches( $decoded, "(&lt;|&gt;|&amp;|&quot;|&apos;)" ) )
         then fn:string($decoded)
