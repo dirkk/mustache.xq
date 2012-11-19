@@ -1,5 +1,9 @@
 # mustache.xq Changes
 
+## 0.2.1
+
+* Works with BaseX
+
 ## 0.2
 
 * Recursive descent parser "parser.xq" is the new default parser
