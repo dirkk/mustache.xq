@@ -146,6 +146,12 @@ This is not the actual test that we run (you can see a list of those in test/ind
      Hash     : { "company": "<b>BaseX</b>" }
      Output   : <div>&lt;b&gt;BaseX&lt;/b&gt; <b>BaseX</b></div>
 
+or
+
+     Template : {{company}} {{&amp;company}}
+     Hash     : { "company": "<b>BaseX</b>" }
+     Output   : <div>&lt;b&gt;BaseX&lt;/b&gt; <b>BaseX</b></div>
+
 ####  ✔ Sections with Non-False Values
      Template : Shown. {{#nothin}} Never shown! {{/nothin}}
      Hash     : { "person": true }
