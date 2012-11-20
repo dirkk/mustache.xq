@@ -829,6 +829,48 @@ Tag 3 is in normal style again.</div></output>
 	</multi>
     </parseTree>
   </test>
+  <test name="Partial import" section="partial">
+    <template>{'<h2>Names</h2>{{#names}}{{> partial_import.xq}}{{/names}}'}</template>
+    <hash>{'{
+	"names": [
+	  { "name": "Peter" },
+	  { "name": "Klaus" }
+	]}'}
+    </hash>
+    <output><div><h2>Names</h2>
+  <strong>Peter</strong>
+  <strong>Klaus</strong>
+</div></output>
+    <parseTree>
+	<multi>
+	  <static>&lt;h2&gt;Names&lt;/h2&gt;</static>
+	  <section name="names">
+	    <partial name="partial_import.xq"/>
+	  </section>
+	</multi>
+    </parseTree>
+  </test>
+  <test name="Double partial import" section="partial">
+    <template>{'<h2>Names</h2>{{#names}}{{> partial_import2.xq}}{{/names}}'}</template>
+    <hash>{'{
+	"names": [
+	  { "name": "Peter" },
+	  { "name": "Klaus" }
+	]}'}
+    </hash>
+    <output><div><h2>Names</h2>
+  <h1><strong>Peter</strong></h1>
+  <h1><strong>Klaus</strong></h1>
+</div></output>
+    <parseTree>
+	<multi>
+	  <static>&lt;h2&gt;Names&lt;/h2&gt;</static>
+	  <section name="names">
+	    <partial name="partial_import2.xq"/>
+	  </section>
+	</multi>
+    </parseTree>
+  </test>
   <test name="Parser Non-False Values" section="parser">
     <template>{'{{#person?}}
       Hi {{name}}!
@@ -903,7 +945,7 @@ Tag 3 is in normal style again.</div></output>
     <template>{'{{> next_more}}'}</template>
     <parseTree>
       <multi> 
-        <partial name="next__more"/> 
+        <partial name="next_more"/> 
       </multi>
     </parseTree>
   </test>

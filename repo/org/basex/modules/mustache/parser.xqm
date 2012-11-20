@@ -192,7 +192,7 @@ declare function parseETag($in as xs:string?, $n, $sd as xs:string, $ed as xs:st
              else if($n eq $parser:_START_COMMENT_) then
                element comment { text{ $r/@value } }
              else
-               element partial { attribute name { fn:replace($name, "([^_]?)_([^_]?)", "$1__$2" ) } }
+               element partial { attribute name { $name } }
            }
          else error($r2)
      else error($r)

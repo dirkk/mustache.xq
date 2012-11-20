@@ -184,7 +184,10 @@ or
      Hash     : {}
      Output   : <div><h1>Today.</h1></div>
 
-####  ✕ Partials
+####  ✔ Partials
+     Template : <h2>Names</h2>{{#names}}{{> partial_import.xq}}{{/names}}
+     Hash     : { "names": [ { "name": "Peter" }, { "name": "Klaus" } ] }
+     Output   : <div><h2>Names</h2><strong>Peter</strong><strong>Klaus</strong></div>
 
 ####  ✔ Set Delimiter
      Template : <h1>{{foo}}</h1><h2>{{=<% %>}}<%bar%></h2>

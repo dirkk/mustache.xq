@@ -2,8 +2,9 @@
   XQuery Generator for mustache
 :)
 xquery version "3.0" ;
-
 module namespace compiler = "http://basex.org/modules/mustache/compiler";
+
+import module namespace parser = "http://basex.org/modules/mustache/parser";
 
 declare function compiler:compile( $parseTree, $json ) {
  let $div := parse-xml( concat( '&lt;div&gt;',
@@ -27,6 +28,7 @@ declare function compiler:compile-node( $node, $json, $pos, $xpath ) {
     case element(rtag)    return 
       string-join(compiler:eval( $node/@name, $json, $pos, $xpath, true(), 'desc' ), " ")
     case element(static)  return $node/string()
+    case element(partial) return compiler:compile-xpath(parser:parse(file:read-text($node/@name)), $json, $pos, $xpath)
     case element(comment) return ()
     case element(inverted-section) return
       let $sNode := compiler:unpath( string( $node/@name ) , $json, $pos, $xpath )
