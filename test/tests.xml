@@ -771,6 +771,64 @@
       </multi>
     </parseTree>
   </test>
+  <test name="Simple delimiter switch" section="delimiter">
+    <template>{'{{tag1}} is in normal angular brackets.
+{{=<% %>=}}
+<%tag2%> is in ERB style.'}</template>
+    <hash>{'{
+  "tag1": "Tag 1",
+  "tag2": "Tag 2"
+}'}</hash>
+    <output><div>Tag 1 is in normal angular brackets.
+
+Tag 2 is in ERB style.</div></output>
+    <parseTree>
+	<multi>
+	  <etag name="tag1"/>
+	  <static> is in normal angular brackets.
+	</static>
+	  <static>
+	</static>
+	  <etag name="tag2"/>
+	  <static> is in ERB style.
+	</static>
+	</multi>
+    </parseTree>
+  </test>
+  <test name="Double delimiter switch" section="delimiter">
+    <template>{'{{tag1}} is in normal angular brackets.
+{{=<% %>=}}
+<%tag2%> is in ERB style.
+<%={{ }}=%>
+{{tag3}} is in normal style again.'}</template>
+    <hash>{'{
+  "tag1": "Tag 1",
+  "tag2": "Tag 2",
+  "tag3": "Tag 3"
+}'}</hash>
+    <output><div>Tag 1 is in normal angular brackets.
+
+Tag 2 is in ERB style.
+
+Tag 3 is in normal style again.</div></output>
+    <parseTree>
+	<multi>
+	  <etag name="tag1"/>
+	  <static> is in normal angular brackets.
+	</static>
+	  <static>
+	</static>
+	  <etag name="tag2"/>
+	  <static> is in ERB style.
+	</static>
+	  <static>
+	</static>
+	  <etag name="tag3"/>
+	  <static> is in normal style again.
+	</static>
+	</multi>
+    </parseTree>
+  </test>
   <test name="Parser Non-False Values" section="parser">
     <template>{'{{#person?}}
       Hi {{name}}!
