@@ -218,8 +218,7 @@ on "Contribute" and send in your code
 
 * Support XML as well as JSON
 * Clean up whitespace with "&#x0a;"
-* XQuery Lambdas (still haven't thought about how this magic would look like)
-* Partials
+* XQuery Lambdas
 
 ### Known Limitations
 
