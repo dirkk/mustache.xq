@@ -146,14 +146,14 @@ This is not the actual test that we run (you can see a list of those in test/ind
      Hash     : { "company": "<b>BaseX</b>" }
      Output   : <div>&lt;b&gt;BaseX&lt;/b&gt; <b>BaseX</b></div>
 
-####  ✔ Comments
-     Template : <h1>Today{{! ignore me }}.</h1>
-     Hash     : {}
-     Output   : <div><h1>Today.</h1></div>
-
-####  ✔ Sections
+####  ✔ Sections with Non-False Values
      Template : Shown. {{#nothin}} Never shown! {{/nothin}}
      Hash     : { "person": true }
+     Output   : <div>Shown.</div>
+
+####  ✔ False Values or Empty Lists
+     Template : Shown.{{#nothing}}Never shown!{{/nothing}}
+     Hash     : { "different": true }
      Output   : <div>Shown.</div>
 
 ####  ✔ Nested Sections
@@ -161,19 +161,29 @@ This is not the actual test that we run (you can see a list of those in test/ind
      Hash     : { "foo": [ {"a": {"b": 1}}, {"a": {"b": 2}}, {"a": {"b": 3}} ] }
      Output   : <div>123</div>
 
-####  ✔ Conditional Sections
-     Template : {{#repo}} <b>{{name}}</b> {{/repo}} {{^repo}} No repos :( {{/repo}}
-     Hash     :   { "repo": [] }
+####  ✔ Non-Empty Lists
+     Template : {{#repo}} <b>{{name}}</b> {{/repo}}
+     Hash     : { "repo": [ { "name": "resque" }, { "name": "hub" }, { "name": "rip" } ] }
+     Output   : <div><b>resque</b><b>hub</b><b>rip</b></div>
+
+####  ✔ Inverted Sections
+     Template : {{#repo}}<b>{{name}}</b>{{/repo}}{{^repo}} No repos :({{/repo}}
+     Hash     : { "repo": [] }
      Output   : <div>No Repos :(</div>
+
+####  ✕ Lambdas
+
+####  ✔ Comments
+     Template : <h1>Today{{! ignore me }}.</h1>
+     Hash     : {}
+     Output   : <div><h1>Today.</h1></div>
+
+####  ✕ Partials
 
 ####  ✔ Set Delimiter
      Template : <h1>{{foo}}</h1><h2>{{=<% %>}}<%bar%></h2>
      Hash     : { "foo": "double mustaches", "bar": "ERB style" }
      Output   : <div><h1>double moustaches</h1><h2>ERB style</h2></div>
-
-####  ✕ Partials
-
-####  ✕ Lambdas
 
 ### Extensions
 
