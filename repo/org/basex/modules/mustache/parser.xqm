@@ -23,11 +23,15 @@ declare variable $parser:_START_EXT_ := 10;
 declare variable $parser:_END_ := 11;
 declare variable $parser:_STRING_ := 12;
 
-declare function parse( $template ) {
+declare function parse($template as xs:string?) as element()
+{
    parseContent($template, "{{", "}}")
 };
 
-declare function parseContent($in as xs:string?, $sd as xs:string, $ed as xs:string)
+declare function parseContent(
+  $in as xs:string?,
+  $sd as xs:string,
+  $ed as xs:string) as element()
 {
    let $r      := nextToken( $in, $sd, $ed )
    let $token  := $r/@token/fn:number()
@@ -64,18 +68,27 @@ declare function parseContent($in as xs:string?, $sd as xs:string, $ed as xs:str
      else error($r)
 };
 
-declare function token($token, $in, $length)
+declare function token(
+  $token as xs:integer,
+  $in as xs:string?,
+  $length as xs:integer)
 {
   <token token="{$token}" value="{fn:substring($in,1,$length)}"
     remain="{fn:substring($in, $length + 1)}"/>
 };
 
-declare function nextToken($in as xs:string?, $sdelim, $edelim)
+declare function nextToken(
+  $in as xs:string?,
+  $sdelim as xs:string,
+  $edelim as xs:string)
 {
   nextToken_($in, $sdelim, $edelim)
 };
 
-declare function nextToken_($in as xs:string?, $sdelim as xs:string, $edelim as xs:string)
+declare function nextToken_(
+  $in as xs:string?,
+  $sdelim as xs:string,
+  $edelim as xs:string)
 {
   if(fn:starts-with($in, $sdelim)) then
     let $nextc := fn:substring($in, 3, 1)

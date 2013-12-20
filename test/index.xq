@@ -1,6 +1,6 @@
 xquery version "3.0" ;
 
-declare variable $dir := file:dir-name(static-base-uri()) || '/';
+declare variable $dir := file:parent(static-base-uri()) || '/';
 
 declare variable $tests := xquery:invoke($dir || 'tests.xml');
 
