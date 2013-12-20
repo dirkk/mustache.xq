@@ -64,7 +64,7 @@ declare function compiler:compile-node(
     case element(section) return
       let $sNode := compiler:unpath(string($node/@name), $json, $pos, $xpath)
       return 
-        if ($sNode/@boolean = "true" or (not(empty(
+        if ($sNode/@boolean = "true" or ($sNode/@type = "boolean" and $sNode = "true") or (not(empty(
           tokenize($json/@booleans, '\s')[.=$node/@name])) and
             $sNode/text() = "true"))
         then compiler:compile-xpath($node, $json, $pos, $xpath)
